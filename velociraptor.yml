@@ -1,0 +1,10 @@
+envFile:
+  - .env
+
+scripts:
+  main:
+    desc: Runs main script
+    cmd: deno run -A --watch=static/,routes/ dev.ts
+  server:
+    desc: Starts local server
+    cmd: deployctl run --env=.env server.ts
