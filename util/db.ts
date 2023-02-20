@@ -1,8 +1,5 @@
 import { Client } from "https://deno.land/x/postgres@v0.17.0/mod.ts";
-import { config as dotEnvConfig } from "https://deno.land/x/dotenv@v1.0.1/mod.ts";
 import * as bcrypt from "https://deno.land/x/bcrypt@v0.4.1/mod.ts";
-
-dotEnvConfig({ export: true });
 
 const client = new Client({
   user: Deno.env.get("DB_USER"),
