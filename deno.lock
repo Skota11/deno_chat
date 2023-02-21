@@ -331,6 +331,7 @@
       "@react-spring/web": "@react-spring/web@9.6.1_react@18.2.0",
       "@stitches/react": "@stitches/react@1.2.8",
       "bcrypt": "bcrypt@5.1.0",
+      "bcrypt@5.0.1": "bcrypt@5.0.1",
       "react-spring": "react-spring@9.6.1_react@18.2.0_react-dom@18.2.0",
       "socket.io-client": "socket.io-client@4.6.0"
     },
@@ -2259,6 +2260,13 @@
           "pascalcase": "pascalcase@0.1.1"
         }
       },
+      "bcrypt@5.0.1": {
+        "integrity": "sha512-9BTgmrhZM2t1bNuDtrtIMVSmmxZBrJ71n8Wg+YgdjHuIWYF7SjjmCPZFB+/5i/o/PIeRpwVJR3P+NrpIItUjqw==",
+        "dependencies": {
+          "@mapbox/node-pre-gyp": "@mapbox/node-pre-gyp@1.0.10",
+          "node-addon-api": "node-addon-api@3.2.1"
+        }
+      },
       "bcrypt@5.1.0": {
         "integrity": "sha512-RHBS7HI5N5tEnGTmtR/pppX0mmDSBpQ4aCBsj7CEQfYXDcO74A8sIBYcJMuCsis2E81zDxeENYhv66oZwLiA+Q==",
         "dependencies": {
@@ -3920,6 +3928,10 @@
       },
       "nocache@3.0.4": {
         "integrity": "sha512-WDD0bdg9mbq6F4mRxEYcPWwfA1vxd0mrvKOyxI7Xj/atfRHVeutzuWByG//jfm4uPzp0y4Kj051EORCBSQMycw==",
+        "dependencies": {}
+      },
+      "node-addon-api@3.2.1": {
+        "integrity": "sha512-mmcei9JghVNDYydghQmeDX8KoAm0FAiYyIcUt/N4nhyAipB17pllZQDOJD2fotxABnt4Mdz+dKTO7eftLg4d0A==",
         "dependencies": {}
       },
       "node-addon-api@5.1.0": {
