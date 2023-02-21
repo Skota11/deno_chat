@@ -29,15 +29,15 @@ export async function db_SignInWithNameAndPassword(name: string, pwd: string) {
   ).then(
     async (res) => {
       if (res.rows.length !== 0) {
-        return await bcrypt.compareSync(pwd, res.rows[0].password).then(
-          (isCorrectPassword) => {
-            if (isCorrectPassword) {
-              return [true, res.rows[0]];
-            } else {
-              return [false, []];
-            }
-          },
+        const isCorrectPassword = await bcrypt.compareSync(
+          pwd,
+          res.rows[0].password,
         );
+        if (isCorrectPassword) {
+          return [true, res.rows[0]];
+        } else {
+          return [false, []];
+        }
       } else {
         return [false, []];
       }
