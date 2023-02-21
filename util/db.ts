@@ -1,5 +1,5 @@
 import { Client } from "https://deno.land/x/postgres@v0.17.0/mod.ts";
-import { compare_ut, hash_ut } from "./bcrypt.ts";
+import * as bcrypt from "https://deno.land/x/bcrypt/mod.ts";
 
 const client = new Client({
   user: Deno.env.get("DB_USER"),
@@ -29,7 +29,7 @@ export async function db_SignInWithNameAndPassword(name: string, pwd: string) {
   ).then(
     async (res) => {
       if (res.rows.length !== 0) {
-        return await compare_ut(pwd, res.rows[0].password).then(
+        return await bcrypt.compareSync(pwd, res.rows[0].password).then(
           (isCorrectPassword) => {
             if (isCorrectPassword) {
               return [true, res.rows[0]];
@@ -58,7 +58,7 @@ export async function db_Register(
         return [false, []];
       } else {
         console.log("TTEST");
-        return await hash_ut(password).then((hashed) => {
+        return await bcrypt.hashSync(password).then((hashed) => {
           return client.queryObject(
             "INSERT INTO acount (name,display_name,img_url,password) VALUES ($1, $2 ,$3,$4)",
             [name, display_name, "https://example.com", hashed],
