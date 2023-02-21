@@ -11,7 +11,12 @@ app.use((ctx) => {
   ctx.response.body = "Hello World!";
 });
 
-const io = new Server();
+const io = new Server({
+  cors: {
+    origin: "https://example.com",
+    methods: ["GET", "POST"],
+  },
+});
 
 io.on("connection", (socket) => {
   console.log(`socket ${socket.id} connected`);
