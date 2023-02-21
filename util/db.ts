@@ -27,9 +27,9 @@ export async function db_SignInWithNameAndPassword(name: string, pwd: string) {
     "SELECT * FROM acount where name = $1",
     [name],
   ).then(
-    (res) => {
+    async (res) => {
       if (res.rows.length !== 0) {
-        return compare(pwd, res.rows[0].password).then(
+        return await compare(pwd, res.rows[0].password).then(
           (isCorrectPassword) => {
             if (isCorrectPassword) {
               return [true, res.rows[0]];
@@ -53,12 +53,12 @@ export async function db_Register(
   return await client.queryObject("SELECT * FROM acount where name = $1", [
     name,
   ]).then(
-    (res) => {
+    async (res) => {
       if (res.rows.length !== 0) {
         return [false, []];
       } else {
         console.log("TTEST");
-        return hash(password).then((hashed) => {
+        return await hash(password).then((hashed) => {
           return client.queryObject(
             "INSERT INTO acount (name,display_name,img_url,password) VALUES ($1, $2 ,$3,$4)",
             [name, display_name, "https://example.com", hashed],
