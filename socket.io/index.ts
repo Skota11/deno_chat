@@ -13,7 +13,7 @@ app.use((ctx) => {
 
 const io = new Server({
   cors: {
-    origin: "https://example.com",
+    origin: "*",
     methods: ["GET", "POST"],
   },
 });
