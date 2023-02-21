@@ -23,6 +23,7 @@ export const handler: Handlers = {
 };
 
 export default function Home({ data }: PageProps) {
+  console.log(data);
   const nowlogin = (res) => {
     if (res == null) {
       return (
