@@ -58,19 +58,18 @@ export async function db_Register(
         return [false, []];
       } else {
         console.log("TTEST");
-        return await bcrypt.hashSync(password).then((hashed) => {
-          return client.queryObject(
-            "INSERT INTO acount (name,display_name,img_url,password) VALUES ($1, $2 ,$3,$4)",
-            [name, display_name, "https://example.com", hashed],
-          ).then(async () =>
-            await client.queryObject(
-              "SELECT * FROM acount where name = $1",
-              [name],
-            ).then((res) => {
-              return [true, res.rows[0]];
-            })
-          );
-        });
+        const hashed = await bcrypt.hashSync(password);
+        return client.queryObject(
+          "INSERT INTO acount (name,display_name,img_url,password) VALUES ($1, $2 ,$3,$4)",
+          [name, display_name, "https://example.com", hashed],
+        ).then(async () =>
+          await client.queryObject(
+            "SELECT * FROM acount where name = $1",
+            [name],
+          ).then((res) => {
+            return [true, res.rows[0]];
+          })
+        );
       }
     },
   );
