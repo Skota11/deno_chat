@@ -1,12 +1,17 @@
 import { io } from "https://cdn.socket.io/4.4.1/socket.io.esm.min.js";
 
-export default function MyComponent(props: { target: [] }) {
-  const socket = io("ws://192.168.1.4:5000");
-  socket.on("ping", () => {
-    console.log("pong");
+export default function MyComponent(props: { data: [] }) {
+  const socket = io("socket.skota11.com");
+
+  socket.on("connect", () => {
+    console.log(socket.connected); // true
+
+    socket.emit("login", props.data);
+
+    socket.on("member-post", (msg) => {
+      console.log(msg);
+    });
   });
-  socket.emit("TEST", "TTT");
-  // サーバに接続できた場合のイベント処理を定義する
   return (
     <>
       <div>
