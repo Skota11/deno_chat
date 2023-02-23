@@ -1,7 +1,7 @@
 import { io } from "https://cdn.socket.io/4.4.1/socket.io.esm.min.js";
 
 export default function MyComponent(props: { target: [] }) {
-  const socket = io("wss://mong-deno-s.deno.dev");
+  const socket = io("ws://localhost:8080");
   socket.on("ping", () => {
     console.log("pong");
   });
