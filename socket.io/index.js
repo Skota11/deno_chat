@@ -10,9 +10,6 @@ const io   = require("socket.io")(http,{
 /**
  * "/"にアクセスがあったらindex.htmlを返却
  */
-app.get("/", (req, res)=>{
-  res.sendFile(__dirname + "/index.html");
-});
 
 /**
  * [イベント] ユーザーが接続
@@ -20,8 +17,11 @@ app.get("/", (req, res)=>{
 io.on("connection", (socket)=>{
   console.log("ユーザーが接続しました");
 
-  socket.on("post", (msg)=>{
-    io.emit("member-post", msg);
+  socket.on("login", (msg)=>{
+    socket.user_id = msg.user_id;
+    socket.name = msg.name;
+    socket.display_name = msg.display_name;
+    socket.img = msg.img_url;
   });
 });
 

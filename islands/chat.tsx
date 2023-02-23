@@ -1,7 +1,7 @@
 import { io } from "https://cdn.socket.io/4.4.1/socket.io.esm.min.js";
 
 export default function MyComponent(props: { data: [] }) {
-  const socket = io("socket.skota11.com");
+  const socket = io("wss://socket.skota11.com");
 
   socket.on("connect", () => {
     console.log(socket.connected); // true
