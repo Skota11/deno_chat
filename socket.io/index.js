@@ -22,6 +22,8 @@ io.on("connection", (socket)=>{
     socket.name = msg.name;
     socket.display_name = msg.display_name;
     socket.img = msg.img_url;
+
+    socket.emit("log",`@${socket.name}が入室しました。`)
   });
 });
 

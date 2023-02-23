@@ -11,11 +11,22 @@ export default function MyComponent(props: { data: [] }) {
     socket.on("member-post", (msg) => {
       console.log(msg);
     });
+    socket.on("log", (msg) => {
+      const list = document.querySelector("#msglist");
+      const li = document.createElement("p");
+      li.innerHTML = `<span class="msg"> - ${msg}</span>`;
+      list.appendChild(li, list.firstChild);
+    });
   });
   return (
     <>
       <div>
-        <p>TEST</p>
+        <div class="w-48 rounded-md shadow-xl h-screen bg-cloudy float-right">
+          <p>TEST</p>
+        </div>
+        <div class="">
+          <p>TEST</p>
+        </div>
       </div>
     </>
   );
