@@ -30,7 +30,7 @@ io.on("connection", (socket)=>{
     socket.emit("newmsg",{content:`@${socket.name}が入室しました。`})
   });
   socket.on("newmsg", (msg)=>{
-    socket.emit("newmsg",{name:socket.name , display_name:socket.display_name , img:socket.img ,content:`@${socket.name}が入室しました。`})
+    socket.emit("newmsg",{name:socket.name , display_name:socket.display_name , img:socket.img ,content:msg.content})
   });
 });
 

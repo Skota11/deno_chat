@@ -13,6 +13,12 @@ export default function MyComponent(props: { data: [] }) {
       li.innerHTML = `<span class="msg"> - ${msg.content}</span>`;
       list.appendChild(li, list.firstChild);
     });
+    socket.on("newmsg", (msg) => {
+      const list = msglist;
+      const li = document.createElement("p");
+      li.innerHTML = `<span class="msg"> - ${msg.content}</span>`;
+      list.appendChild(li, list.firstChild);
+    });
   });
 
   const pressEnter = (e: any) => {
