@@ -1,11 +1,25 @@
 const app  = require("express")();
 const http = require("http").createServer(app);
+
+const crypto = require('crypto');
 const io   = require("socket.io")(http,{
     cors: {
       origin: "*",
       methods: ["GET", "POST"]
     }
   });
+
+  function createRandomId() {
+    const S = '0123456789abcdefghijklmnopqrstuvwxyz';
+    const L = 8;
+    let buf = crypto.randomBytes(L);
+    let rnd = '';
+    for (var i = 0; i < L; i++) {
+      rnd += S.charAt(Math.floor((buf[i] / 256) * S.length));
+    }
+    return rnd;
+  }
+
 io.on("connection", (socket)=>{
   console.log("ユーザーが接続しました");
 
@@ -30,7 +44,8 @@ io.on("connection", (socket)=>{
     socket.emit("newmsg",{content:`@${socket.name}が入室しました。`})
   });
   socket.on("newmsg", (msg)=>{
-    socket.emit("newmsg",{name:socket.name , display_name:socket.display_name , img:socket.img ,content:msg.content})
+
+    socket.emit("newmsg",{id:createRandomId(),soname:socket.name , display_name:socket.display_name , img:socket.img ,content:msg.content})
   });
 });
 
