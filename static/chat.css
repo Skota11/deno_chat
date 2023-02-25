@@ -1,0 +1,52 @@
+.msg {
+    margin-left: 15px;
+    transition: background-color .3s;
+    margin-bottom: 1em;
+  }
+  
+  .msg:hover {
+    background-color: gainsboro;
+  }
+  
+  .username {
+    font-size: 1em;
+  }
+  
+  .m_emoji {
+    background-color: #3b469b;
+    color: white;
+  }
+  
+  .nowdate {
+    font-size: 0.6em;
+    color: gainsboro;
+  }
+  
+  .status_name {
+    font-size: 1.2em;
+  }
+  
+  .status {
+    font-size: 0.8em;
+  }
+  
+  .content {
+    font-size: 1em;
+    white-space: nowrap;
+  }
+  
+  ul {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    list-style: none;
+  }
+  
+  .msg_ul {
+    padding-left: 40px;
+  }
+  
+  .msg_ul li {
+    margin: 0;
+    line-height: 0;
+  }

@@ -6,14 +6,6 @@ const io   = require("socket.io")(http,{
       methods: ["GET", "POST"]
     }
   });
-
-/**
- * "/"にアクセスがあったらindex.htmlを返却
- */
-
-/**
- * [イベント] ユーザーが接続
- */
 io.on("connection", (socket)=>{
   console.log("ユーザーが接続しました");
 
@@ -26,6 +18,19 @@ io.on("connection", (socket)=>{
     console.log(socket)
 
     socket.emit("log",{type:0,content:`@${socket.name}が入室しました。`})
+  });
+  socket.on("login", (msg)=>{
+    socket.user_id = msg.id;
+    socket.name = msg.name;
+    socket.display_name = msg.display_name;
+    socket.img = msg.img_url;
+
+    console.log(socket)
+
+    socket.emit("newmsg",{content:`@${socket.name}が入室しました。`})
+  });
+  socket.on("newmsg", (msg)=>{
+    socket.emit("newmsg",{name:socket.name , display_name:socket.display_name , img:socket.img ,content:`@${socket.name}が入室しました。`})
   });
 });
 

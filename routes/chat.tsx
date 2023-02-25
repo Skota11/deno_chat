@@ -28,6 +28,7 @@ export default function Home({ data }: PageProps) {
       <Head>
         <Common_head />
         <title>Mongrop</title>
+        <link rel="stylesheet" href="chat.css" />
       </Head>
       <body class="bg-wild_sand pb-16">
         <Header data={data} />

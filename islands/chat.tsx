@@ -2,22 +2,23 @@ import { io } from "https://cdn.socket.io/4.4.1/socket.io.esm.min.js";
 import { useState } from "preact/hooks";
 
 export default function MyComponent(props: { data: [] }) {
-  const [messages, setMsgObject] = useState(0);
-
   const socket = io("wss://socket-mongrop.onrender.com");
 
   socket.on("connect", () => {
     socket.emit("login", props.data);
 
     socket.on("log", (msg) => {
-      const Obj = messages + 1;
-      setMsgObject(Obj);
+      const list = msglist;
+      const li = document.createElement("p");
+      li.innerHTML = `<span class="msg"> - ${msg.content}</span>`;
+      list.appendChild(li, list.firstChild);
     });
   });
 
   const pressEnter = (e: any) => {
     if (e.key == "Enter") {
-      document.getElementById("content").innerHTML = "";
+      content.innerHTML = "";
+      socket.emit("newmsg", content.textContent);
       return e.preventDefault();
     }
   };
@@ -28,16 +29,6 @@ export default function MyComponent(props: { data: [] }) {
         </div>
         <div class="">
           <div id="msglist">
-            {
-              /* {messages.map((message) => {
-              console.log(message);
-              if (message.type == 0) {
-                return <p>{message.content}</p>;
-              } else if (message.type == 1) {
-              }
-            })} */
-            }
-            {messages}
           </div>
           <div class="fixed w-10/12 bottom-0 mb-4 rounded-md w-full h-auto bg-cloudy">
             <div class="inline-block m-auto w-full h-auto">
