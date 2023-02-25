@@ -23,6 +23,8 @@ io.on("connection", (socket)=>{
     socket.display_name = msg.display_name;
     socket.img = msg.img_url;
 
+    console.log(socket)
+
     socket.emit("log",{type:0,content:`@${socket.name}が入室しました。`})
   });
 });
