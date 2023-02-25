@@ -15,7 +15,14 @@ export default function MyComponent(props: { data: [] }) {
     });
     socket.on("newmsg", (msg) => {
       const list = msglist;
-      const li = document.createElement("p");
+      const content_div = document.createElement("div");
+      const today = new Date();
+      var Hour = today.getHours();
+      var Min = today.getMinutes();
+      var Sec = today.getSeconds();
+      content_div.innerHTML =
+        `<div id="${msg.id}" class="msg" oncontextmenu="onrightclick('${msg.id}')" onmouseover="onreplybutton('${msg.id}_menu')" onmouseleave="outreplybutton('${msg.id}_menu')"><img class="userimg" src="${msg.img}"><ul class="msg_ul"><li id="${msg.id}_username" class="username"><a href="/users/${msg.username}">${msg.name}/@${msg.username}</a> <span class="nowdate">${Hour}:${Min}:${Sec}</span></li><br><li id="${msg.id}_content"><a href="${msg.content}" target="_blank" rel="noopener noreferrer" class="info">${msg.content}(外部リンクへ移動します)</a></li></ul><div id="${msg.id}_emoji"></div><div id="${msg.id}_menu" style="display: none;"><button id="${msg.id}_reply" onclick="makereply('${msg.id}')">返信</button> / <button onclick="newemoji('👍','${msg.id}')">👍</button><button onclick="newemoji('🤔' , '${msg.id}')">🤔</button><button onclick="newemoji('👏' , '${msg.id}')">👏</button><button onclick="newemoji('😢' , '${msg.id}')">😢</button></div></div>`;
+      list.appendChild(content_div, list.firstChild);
       li.innerHTML = `<span class="msg"> - ${msg.content}</span>`;
       list.appendChild(li, list.firstChild);
     });
