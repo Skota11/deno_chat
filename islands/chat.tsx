@@ -11,11 +11,10 @@ export default function MyComponent(props: { data: [] }) {
 
     socket.emit("login", props.data);
 
-    socket.on("member-post", (msg: any) => {
-      console.log(msg);
-    });
     socket.on("log", (msg) => {
-      setMsgObject(messages.unshift(msg));
+      const Obj = messages;
+      Obj.push(msg);
+      setMsgObject(Obj);
     });
   });
 
@@ -26,6 +25,7 @@ export default function MyComponent(props: { data: [] }) {
       return e.preventDefault();
     }
   };
+  console.log(messages);
   return (
     <>
       <div>
@@ -34,26 +34,12 @@ export default function MyComponent(props: { data: [] }) {
         </div>
         <div class="">
           <div id="msglist">
-            {messages.map((message) => (
+            {messages.map((message) => {
               if (message.type == 0) {
-                return (
-                  <>
-                  <p>{message.content}</p>
-                  </>
-                )
-              }else if (message.type == 1) {
-                
+                return <p>{message.content}</p>;
+              } else if (message.type == 1) {
               }
-              <li class="border-solid border-l-4 pl-2">
-                <a href={`articles/${article.id}`}>
-                  <h1 class="text-2xl my-2">{article.title}</h1>
-                  <p class="text-gray-600">{article.info}</p>
-                  <p class="text-gray-600">
-                    {datetime(article.created_at).format("YYYY/MMMM/dd")}
-                  </p>
-                </a>
-              </li>
-            ))}
+            })}
           </div>
           <div class="fixed w-10/12 bottom-0 mb-4 rounded-md w-full h-auto bg-cloudy">
             <div class="inline-block m-auto w-full h-auto">
