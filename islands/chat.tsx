@@ -29,7 +29,7 @@ export default function MyComponent(props: { data: [] }) {
   const pressEnter = (e: any) => {
     if (e.key == "Enter") {
       content.innerHTML = "";
-      socket.emit("newmsg", content.textContent);
+      socket.emit("newmsg", document.getElementById("content").textContent);
       return e.preventDefault();
     }
   };
