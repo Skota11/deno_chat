@@ -59,11 +59,11 @@ io.on("connection", (socket)=>{
   socket.on("disconnect", () => {
     io.emit("log",{content:`@${socket.name}が退出しました。`})
     console.log("退出");
-      usernum[socket.username] = usernum[socket.username] - 1;
+      usernum[socket.name] = usernum[socket.name] - 1;
       console.log(usernum)
-      if (usernum[socket.username] == 0) {
+      if (usernum[socket.name] == 0) {
         for (i = 0; i < nowlogin.length; i++) {
-          if (nowlogin[i] == socket.username) {
+          if (nowlogin[i] == socket.name) {
             //spliceメソッドで要素を削除
             nowlogin.splice(i, 1);
             break;
