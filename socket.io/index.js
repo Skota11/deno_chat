@@ -50,14 +50,14 @@ io.on("connection", (socket)=>{
     } else {
       nowlogin[nowlogin.length] = socket.name;
     }
-    socket.emit("log",{content:`@${socket.name}が入室しました。`})
+    io.emit("log",{content:`@${socket.name}が入室しました。`})
   });
   socket.on("newmsg", (msg)=>{
     console.log(msg)
-    socket.emit("newmsg",{"id":createRandomId(),"name":socket.name , "display_name":socket.display_name , "img":socket.img , "content":msg});
+    io.emit("newmsg",{"id":createRandomId(),"name":socket.name , "display_name":socket.display_name , "img":socket.img , "content":msg});
   });
   socket.on("disconnect", () => {
-    socket.emit("log",{content:`@${socket.name}が退出しました。`})
+    io.emit("log",{content:`@${socket.name}が退出しました。`})
       usernum[socket.username] = usernum[socket.username] - 1;
       if (usernum[socket.username] == 0) {
         for (i = 0; i < nowlogin.length; i++) {

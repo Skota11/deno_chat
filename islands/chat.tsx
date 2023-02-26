@@ -1,10 +1,10 @@
 import { io } from "https://cdn.socket.io/4.4.1/socket.io.esm.min.js";
 import { useState } from "preact/hooks";
 
+const socket = io("socket.skota11.com");
+
 export default function MyComponent(props: { data: [] }) {
   const [online, setOnline] = useState();
-
-  const socket = io("socket.skota11.com");
   let username_g = props.data.name;
   let lastm;
   let stopserver = false;
@@ -34,8 +34,10 @@ export default function MyComponent(props: { data: [] }) {
 
   const pressEnter = (e: any) => {
     if (e.key == "Enter") {
-      socket.emit("newmsg", document.getElementById("content").textContent);
-      content.innerHTML = "";
+      if (document.getElementById("content").textContent !== "") {
+        socket.emit("newmsg", document.getElementById("content").textContent);
+        content.innerHTML = "";
+      }
       return e.preventDefault();
     }
   };
