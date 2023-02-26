@@ -43,5 +43,5 @@ io.on("connection", (socket)=>{
  * 3000番でサーバを起動する
  */
 http.listen(5000, ()=>{
-  console.log("listening on *:10000");
+  console.log("listening on *:5000");
 });
