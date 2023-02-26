@@ -34,8 +34,8 @@ io.on("connection", (socket)=>{
     socket.emit("log",{content:`@${socket.name}が入室しました。`})
   });
   socket.on("newmsg", (msg)=>{
-
-    socket.emit("newmsg",{id:createRandomId(),name:socket.name , display_name:socket.display_name , img:socket.img ,content:msg.content})
+    console.log(msg)
+    socket.emit("newmsg",{id:createRandomId(),name:socket.name , display_name:socket.display_name , img:socket.img ,content:msg.content});
   });
 });
 

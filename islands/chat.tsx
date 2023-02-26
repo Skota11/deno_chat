@@ -20,8 +20,9 @@ export default function MyComponent(props: { data: [] }) {
       var Hour = today.getHours();
       var Min = today.getMinutes();
       var Sec = today.getSeconds();
+      console.log(msg);
       content_div.innerHTML =
-        `<div id="${msg.id}" class="msg" oncontextmenu="onrightclick('${msg.id}')" onmouseover="onreplybutton('${msg.id}_menu')" onmouseleave="outreplybutton('${msg.id}_menu')"><img class="userimg" src="${msg.img}"><ul class="msg_ul"><li id="${msg.id}_username" class="username"><a href="/users/${msg.name}">${msg.name}/@${msg.display_name}</a> <span class="nowdate">${Hour}:${Min}:${Sec}</span></li><br><li id="${msg.id}_content">${msg.content}</li></ul><div id="${msg.id}_emoji"></div><div id="${msg.id}_menu" style="display: none;"><button id="${msg.id}_reply" onclick="makereply('${msg.id}')">返信</button> / <button onclick="newemoji('👍','${msg.id}')">👍</button><button onclick="newemoji('🤔' , '${msg.id}')">🤔</button><button onclick="newemoji('👏' , '${msg.id}')">👏</button><button onclick="newemoji('😢' , '${msg.id}')">😢</button></div></div>`;
+        `<div id="${msg.id}" class="msg" oncontextmenu="onrightclick('${msg.id}')" onmouseover="onreplybutton('${msg.id}_menu')" onmouseleave="outreplybutton('${msg.id}_menu')"><img class="userimg" src="${msg.img}"><ul class="msg_ul"><li id="${msg.id}_username" class="username"><a href="/users/${msg.name}">${msg.display_name}/@${msg.name}</a> <span class="nowdate">${Hour}:${Min}:${Sec}</span></li><br><li id="${msg.id}_content">${msg.content}</li></ul><div id="${msg.id}_emoji"></div><div id="${msg.id}_menu" style="display: none;"><button id="${msg.id}_reply" onclick="makereply('${msg.id}')">返信</button> / <button onclick="newemoji('👍','${msg.id}')">👍</button><button onclick="newemoji('🤔' , '${msg.id}')">🤔</button><button onclick="newemoji('👏' , '${msg.id}')">👏</button><button onclick="newemoji('😢' , '${msg.id}')">😢</button></div></div>`;
       list.appendChild(content_div, list.firstChild);
     });
   });
