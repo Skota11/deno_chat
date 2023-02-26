@@ -2,8 +2,9 @@ import { io } from "https://cdn.socket.io/4.4.1/socket.io.esm.min.js";
 import { useState } from "preact/hooks";
 
 export default function MyComponent(props: { data: [] }) {
-  const socket = io("socket.skota11.com");
+  const [online, setOnline] = useState();
 
+  const socket = io("socket.skota11.com");
   let username_g = props.data.name;
   let lastm;
   let stopserver = false;
@@ -39,11 +40,11 @@ export default function MyComponent(props: { data: [] }) {
     }
   };
 
-  //
   setInterval(check_mamber, 1000);
   function check_mamber() {
     fetch("https://socket.skota11.com/api/nowlogin").then((res) => {
       res.json().then((text) => {
+        console.log(text);
         if (!text.nowlogin.includes(username_g)) {
           if (!stopserver) {
             swal(
@@ -59,17 +60,7 @@ export default function MyComponent(props: { data: [] }) {
         if (lastm !== text.nowlogin.length) {
           lastm = text.nowlogin.length;
           const content = text.nowlogin;
-          const list = document.querySelector("#online");
-          list.innerHTML = "";
-          for (var i = 0; i < content.length; i++) {
-            const content_div = document.createElement("div");
-            const list = document.querySelector("#online");
-            content_div.innerHTML =
-              `<div><img src=""><span class="status_name">${
-                content[i]
-              }</span><br><span class="status" id="${content[i]}"></span><div>`;
-            list.appendChild(content_div, list.firstChild);
-          }
+          setOnline(content);
         }
       });
     });
@@ -77,8 +68,8 @@ export default function MyComponent(props: { data: [] }) {
   return (
     <>
       <div>
-        <div class="w-48 rounded-md shadow-2xl h-full bg-cloudy float-right fixed bottom-0">
-          <div id="online"></div>
+        <div class="w-48 rounded-md shadow-2xl pt-28 h-full bg-cloudy float-right fixed bottom-0">
+          <div>{online}</div>
         </div>
         <div class="ml-48">
           <div id="msgpst">
