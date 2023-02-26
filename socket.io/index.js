@@ -23,6 +23,12 @@ const io   = require("socket.io")(http,{
   let nowlogin = [];
   let usernum = [];
 
+  app.get("/api/nowlogin", (req, ex_res) => {
+    ex_res.json({
+      nowlogin: nowlogin
+    })
+  })
+
 io.on("connection", (socket)=>{
   console.log("ユーザーが接続しました");
 
