@@ -2,7 +2,7 @@ import { io } from "https://cdn.socket.io/4.4.1/socket.io.esm.min.js";
 import { useState } from "preact/hooks";
 
 export default function MyComponent(props: { data: [] }) {
-  const socket = io("wss://socket-mongrop.onrender.com");
+  const socket = io("192.168.1.4:5000");
   socket.on("connect", () => {
     socket.emit("login", props.data);
 
