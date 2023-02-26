@@ -3,7 +3,6 @@ import { useState } from "preact/hooks";
 
 export default function MyComponent(props: { data: [] }) {
   const socket = io("wss://socket-mongrop.onrender.com");
-
   socket.on("connect", () => {
     socket.emit("login", props.data);
 

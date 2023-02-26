@@ -35,7 +35,7 @@ io.on("connection", (socket)=>{
   });
   socket.on("newmsg", (msg)=>{
     console.log(msg)
-    socket.emit("newmsg",{id:createRandomId(),name:socket.name , display_name:socket.display_name , img:socket.img ,content:msg.content});
+    socket.emit("newmsg",{"id":createRandomId(),"name":socket.name , "display_name":socket.display_name , "img":socket.img , "content":msg.content});
   });
 });
 
