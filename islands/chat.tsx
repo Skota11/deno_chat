@@ -49,13 +49,7 @@ export default function MyComponent(props: { data: [] }) {
         console.log(text);
         if (!text.nowlogin.includes(username_g)) {
           if (!stopserver) {
-            swal(
-              "サーバーから切断されました!",
-              "リロードをして、再接続してください。",
-              "error",
-            ).then((willDelete) => {
-              location.reload();
-            });
+            location.reload();
             stopserver = true;
           }
         }

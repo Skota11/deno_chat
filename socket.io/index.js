@@ -59,6 +59,7 @@ io.on("connection", (socket)=>{
   socket.on("disconnect", () => {
     io.emit("log",{content:`@${socket.name}が退出しました。`})
       usernum[socket.username] = usernum[socket.username] - 1;
+      console.log(usernum)
       if (usernum[socket.username] == 0) {
         for (i = 0; i < nowlogin.length; i++) {
           if (nowlogin[i] == socket.username) {
