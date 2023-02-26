@@ -19,7 +19,7 @@
   
   .nowdate {
     font-size: 0.6em;
-    color: gainsboro;
+    color: #b3aba2;
   }
   
   .status_name {
@@ -38,7 +38,6 @@
   ul {
     margin: 0;
     padding: 0;
-    display: inline-block;
     list-style: none;
   }
   
@@ -48,5 +47,14 @@
   
   .msg_ul li {
     margin: 0;
-    line-height: 0;
+  }
+  .userimg {
+    border-radius: 5px;
+      border: 3px solid #636363;
+      height: 2em;
+      width: 2em;
+      object-fit: cover;
+      margin: 0;
+      padding: 0;
+      display: block;
   }

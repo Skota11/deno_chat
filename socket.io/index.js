@@ -20,6 +20,9 @@ const io   = require("socket.io")(http,{
     return rnd;
   }
 
+  let nowlogin = [];
+  let usernum = [];
+
 io.on("connection", (socket)=>{
   console.log("ユーザーが接続しました");
 
@@ -29,11 +32,32 @@ io.on("connection", (socket)=>{
     socket.display_name = msg.display_name;
     socket.img = msg.img_url;
 
+    if (usernum[socket.name] == undefined) {
+      usernum[socket.name] = 0;
+    }
+    usernum[socket.name] = usernum[socket.name] + 1;
+    if (nowlogin.includes(socket.name)) {
+    } else {
+      nowlogin[nowlogin.length] = socket.name;
+    }
     socket.emit("log",{content:`@${socket.name}が入室しました。`})
   });
   socket.on("newmsg", (msg)=>{
     console.log(msg)
     socket.emit("newmsg",{"id":createRandomId(),"name":socket.name , "display_name":socket.display_name , "img":socket.img , "content":msg});
+  });
+  socket.on("disconnect", () => {
+    socket.emit("log",{content:`@${socket.name}が退出しました。`})
+      usernum[socket.username] = usernum[socket.username] - 1;
+      if (usernum[socket.username] == 0) {
+        for (i = 0; i < nowlogin.length; i++) {
+          if (nowlogin[i] == socket.username) {
+            //spliceメソッドで要素を削除
+            nowlogin.splice(i, 1);
+            break;
+          }
+        }
+      } else {}
   });
 });
 

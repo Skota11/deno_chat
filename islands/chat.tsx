@@ -7,13 +7,13 @@ export default function MyComponent(props: { data: [] }) {
     socket.emit("login", props.data);
 
     socket.on("log", (msg) => {
-      const list = msglist;
-      const li = document.createElement("p");
-      li.innerHTML = `<span class="msg"> - ${msg.content}</span>`;
-      list.appendChild(li, list.firstChild);
+      const pst = msgpst;
+      const p = document.createElement("p");
+      p.innerHTML = `<span class="msg"> - ${msg.content}</span>`;
+      pst.appendChild(p, pst.firstChild);
     });
     socket.on("newmsg", (msg) => {
-      const list = msglist;
+      const pst = msgpst;
       const content_div = document.createElement("div");
       const today = new Date();
       var Hour = today.getHours();
@@ -21,32 +21,32 @@ export default function MyComponent(props: { data: [] }) {
       var Sec = today.getSeconds();
       console.log(msg);
       content_div.innerHTML =
-        `<div id="${msg.id}" class="msg" oncontextmenu="onrightclick('${msg.id}')" onmouseover="onreplybutton('${msg.id}_menu')" onmouseleave="outreplybutton('${msg.id}_menu')"><img class="userimg" src="${msg.img}"><ul class="msg_ul"><li id="${msg.id}_username" class="username"><a href="/users/${msg.name}">${msg.display_name}/@${msg.name}</a> <span class="nowdate">${Hour}:${Min}:${Sec}</span></li><br><li id="${msg.id}_content">${msg.content}</li></ul><div id="${msg.id}_emoji"></div><div id="${msg.id}_menu" style="display: none;"><button id="${msg.id}_reply" onclick="makereply('${msg.id}')">返信</button> / <button onclick="newemoji('👍','${msg.id}')">👍</button><button onclick="newemoji('🤔' , '${msg.id}')">🤔</button><button onclick="newemoji('👏' , '${msg.id}')">👏</button><button onclick="newemoji('😢' , '${msg.id}')">😢</button></div></div>`;
-      list.appendChild(content_div, list.firstChild);
+        `<div class="msg"><div style="display:flex; gap:0.5em;"><img src="${msg.img}" class="userimg"/><span>${msg.display_name}@${msg.name}</span><span class="nowdate">${Hour}:${Min}:${Sec}</span></div><hr style="margin: 0.5em 0;"><div>${msg.content}</div></div>`;
+      pst.appendChild(content_div, pst.firstChild);
     });
   });
 
   const pressEnter = (e: any) => {
     if (e.key == "Enter") {
-      content.innerHTML = "";
       socket.emit("newmsg", document.getElementById("content").textContent);
+      content.innerHTML = "";
       return e.preventDefault();
     }
   };
   return (
     <>
       <div>
-        <div class="w-48 rounded-md shadow-2xl h-screen bg-cloudy w-full float-right">
+        <div class="w-48 rounded-md shadow-2xl h-full bg-cloudy float-right fixed bottom-0">
         </div>
-        <div class="">
-          <div id="msglist">
+        <div class="ml-48">
+          <div id="msgpst">
           </div>
-          <div class="fixed w-10/12 bottom-0 mb-4 rounded-md w-full h-auto bg-cloudy">
-            <div class="inline-block m-auto w-full h-auto">
+          <div class="fixed bottom-0 mb-4 rounded-md w-full h-auto bg-cloudy">
+            <div class="inpne-block m-auto w-full h-auto">
               <div
                 id="content"
                 onKeyDown={(e) => pressEnter(e)}
-                class="p-4 outline-0"
+                class="p-4 outpne-0"
                 contenteditable="true"
               >
               </div>
