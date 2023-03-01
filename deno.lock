@@ -260,6 +260,7 @@
     "https://esm.sh/stable/preact@10.8.2/deno/compat.js": "ae981fb8c9e104f9699ce8e81d8b4a95d269785fdb76ce810939d983b1ad7ff9",
     "https://esm.sh/stable/preact@10.8.2/deno/hooks.js": "fc5e19d8b7cbb302e7ba9644fbac4a01b16f574470ba11bb2bfeebc932ca8d63",
     "https://esm.sh/stable/preact@10.8.2/deno/preact.js": "031934aaff31a664c55e6ec201d5c0b03c3084fecd958b7e2eecc90a2402fa6e",
+    "https://esm.sh/sweetalert@2.1.2": "12634e161adedd608c741321f5fa1513cfe3ccbc7b1d5b7a2b92e2822d32bc8a",
     "https://esm.sh/twind@0.16.17": "fec14040d99e07d0bee23539f99ebabcbcb4717b9f6c86cf56a9dff39791c19d",
     "https://esm.sh/twind@0.16.17/sheets": "8d1b9acdbab6fe7df66b1957ff28505c79f7635cf2acbe24d95b283d1bdc86eb",
     "https://esm.sh/v106/@react-spring/animated@9.6.1/X-YS9yZWFjdDpwcmVhY3QvY29tcGF0CmQvcHJlYWN0QDEwLjExLjA/deno/animated.js": "aa5e4c7fefb92afe77f69a00c0ac2738a8d0c493b9d367900b14170416d00f8a",
@@ -321,7 +322,14 @@
     "https://esm.sh/v106/twind@0.16.17/deno/sheets.js": "f75586c3a778278f99ca9e6761e8c8a2089c66d6a503bb25e3bba38597fe1e30",
     "https://esm.sh/v106/twind@0.16.17/deno/twind.js": "41f9ec5fe59338ccbd5877b6c7d2c41536b6ed725280d447777435fa446faabc",
     "https://esm.sh/v106/twind@0.16.17/sheets/sheets.d.ts": "73505b4708bcde9254db584db58166bda6e45860d905991a2cfa049dda805efa",
-    "https://esm.sh/v106/twind@0.16.17/twind.d.ts": "880fbe3dea75d4d1ed627d272bae4afd34c1865be7f85ff10399aaaaaa3f7869"
+    "https://esm.sh/v106/twind@0.16.17/twind.d.ts": "880fbe3dea75d4d1ed627d272bae4afd34c1865be7f85ff10399aaaaaa3f7869",
+    "https://esm.sh/v108/sweetalert@2.1.2/deno/sweetalert.js": "d12878ef77588fa86c9a6bd6e41f27ab8d3d40f22a97041f8f41ec829aee7d4f",
+    "https://esm.sh/v108/sweetalert@2.1.2/typings/core.d.ts": "630cfc55b4fc20d9866d88bd49a4cdf113434fde92260d399bc779c569b13ca2",
+    "https://esm.sh/v108/sweetalert@2.1.2/typings/modules/options/buttons.d.ts": "6db3c13939a461c4c14aa9022a539d6b81b0ca068065ab03fc4baeed79bcd2fa",
+    "https://esm.sh/v108/sweetalert@2.1.2/typings/modules/options/content.d.ts": "acf4044140ac870cede3a9599c44e37d90b4baa4fd7135c7e9e1ffcf4d06d910",
+    "https://esm.sh/v108/sweetalert@2.1.2/typings/modules/options/index.d.ts": "4d16850fe3824558a8efc0f551a2116a40e6ecbfe5f7e1ee8a32876e3b5575e7",
+    "https://esm.sh/v108/sweetalert@2.1.2/typings/modules/state.d.ts": "56cccf80f5ff0a5c07f52ee522486ca3aaf9d2ad235f78e9a09341ffabd9dbf1",
+    "https://esm.sh/v108/sweetalert@2.1.2/typings/sweetalert.d.ts": "4fec8b9aebbb6f21393c687daa04d618b48b17363ea079a24fc34794be4d1db0"
   },
   "npm": {
     "specifiers": {
@@ -333,7 +341,8 @@
       "bcrypt": "bcrypt@5.1.0",
       "bcrypt@5.0.1": "bcrypt@5.0.1",
       "react-spring": "react-spring@9.6.1_react@18.2.0_react-dom@18.2.0",
-      "socket.io-client": "socket.io-client@4.6.0"
+      "socket.io-client": "socket.io-client@4.6.0",
+      "sweetalert": "sweetalert@2.1.2"
     },
     "packages": {
       "@ampproject/remapping@2.2.0": {
@@ -2739,6 +2748,10 @@
           "escape-html": "escape-html@1.0.3"
         }
       },
+      "es6-object-assign@1.1.0": {
+        "integrity": "sha512-MEl9uirslVwqQU369iHNWZXsI8yaZYGg/D65aOgZkeyFJwHYSxilf7rQzXKI7DdDuBPrBXbfk3sl9hJhmd5AUw==",
+        "dependencies": {}
+      },
       "escalade@3.1.1": {
         "integrity": "sha512-k0er2gUkLf8O0zKJiAhmkTnJlTvINGv7ygDNPbeIsX/TJjGJZHuh9B2UxbsaEkmlEo9MfhrSzmhIlhRlI2GXnw==",
         "dependencies": {}
@@ -4195,6 +4208,10 @@
         "integrity": "sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==",
         "dependencies": {}
       },
+      "promise-polyfill@6.1.0": {
+        "integrity": "sha512-g0LWaH0gFsxovsU7R5LrrhHhWAWiHRnh1GPrhXnPgYsDkIqjRYUYSZEsej/wtleDrz5xVSIDbeKfidztp2XHFQ==",
+        "dependencies": {}
+      },
       "promise@8.3.0": {
         "integrity": "sha512-rZPNPKTOYVNEEKFaq1HqTgOwZD+4/YHS5ukLzQCypkj+OkYx7iv0mA91lJlpPPZ8vMau3IIGj5Qlwrx+8iiSmg==",
         "dependencies": {
@@ -4910,6 +4927,13 @@
         "integrity": "sha512-ZC3r8Hu1y0dIThzsGw0RLZplnX9yXwfItcvaIzJc2VQVi8TGyGDlu92syMB5ulybfvGLHAI5Ghzlk23UBPF8xg==",
         "dependencies": {
           "react": "react@18.2.0"
+        }
+      },
+      "sweetalert@2.1.2": {
+        "integrity": "sha512-iWx7X4anRBNDa/a+AdTmvAzQtkN1+s4j/JJRWlHpYE8Qimkohs8/XnFcWeYHH2lMA8LRCa5tj2d244If3S/hzA==",
+        "dependencies": {
+          "es6-object-assign": "es6-object-assign@1.1.0",
+          "promise-polyfill": "promise-polyfill@6.1.0"
         }
       },
       "tar@6.1.13": {

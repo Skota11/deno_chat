@@ -34,7 +34,6 @@ const io   = require("socket.io")(http,{
   })
 
 io.on("connection", (socket)=>{
-  console.log("ユーザーが接続しました");
 
   socket.on("login", (msg)=>{
     socket.user_id = msg.user_id;
@@ -53,14 +52,14 @@ io.on("connection", (socket)=>{
     io.emit("log",{content:`@${socket.name}が入室しました。`})
   });
   socket.on("newmsg", (msg)=>{
-    console.log(msg)
     io.emit("newmsg",{"id":createRandomId(),"name":socket.name , "display_name":socket.display_name , "img":socket.img , "content":msg});
+  });
+  socket.on("newplay", (msg)=>{
+    io.emit("newplay",{"url" : msg});
   });
   socket.on("disconnect", () => {
     io.emit("log",{content:`@${socket.name}が退出しました。`})
-    console.log("退出");
       usernum[socket.name] = usernum[socket.name] - 1;
-      console.log(usernum)
       if (usernum[socket.name] == 0) {
         for (i = 0; i < nowlogin.length; i++) {
           if (nowlogin[i] == socket.name) {

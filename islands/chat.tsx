@@ -1,10 +1,17 @@
 import { io } from "https://cdn.socket.io/4.4.1/socket.io.esm.min.js";
 import { useState } from "preact/hooks";
 
+import {
+  animated,
+  useSpring,
+} from "https://esm.sh/react-spring@9.6.1?alias=react:preact/compat&deps=preact@10.11.0";
+
 const socket = io("socket.skota11.com");
 
 export default function MyComponent(props: { data: [] }) {
-  const [online, setOnline] = useState();
+  const [online, setOnline] = useState([]);
+  const [AddColumn_show, setAddColumn_show] = useState(false);
+  let isopen = false;
   let username_g = props.data.name;
   let lastm;
   let stopserver = false;
@@ -25,7 +32,6 @@ export default function MyComponent(props: { data: [] }) {
       var Hour = today.getHours();
       var Min = today.getMinutes();
       var Sec = today.getSeconds();
-      console.log(msg);
       content_div.innerHTML =
         `<div class="msg"><div style="display:flex; gap:0.5em;"><img src="${msg.img}" class="userimg"/><span>${msg.display_name}@${msg.name}</span><span class="nowdate">${Hour}:${Min}:${Sec}</span></div><hr style="margin: 0.5em 0;"><div>${msg.content}</div></div>`;
       pst.appendChild(content_div, pst.firstChild);
@@ -46,12 +52,7 @@ export default function MyComponent(props: { data: [] }) {
   function check_mamber() {
     fetch("https://socket.skota11.com/api/nowlogin").then((res) => {
       res.json().then((text) => {
-        console.log(text);
         if (!text.nowlogin.includes(username_g)) {
-          if (!stopserver) {
-            location.reload();
-            stopserver = true;
-          }
         }
         if (lastm !== text.nowlogin.length) {
           lastm = text.nowlogin.length;
@@ -61,13 +62,72 @@ export default function MyComponent(props: { data: [] }) {
       });
     });
   }
+
+  //animation
+  const [springs, api] = useSpring(() => ({
+    from: { x: 0 },
+  }));
+
+  const handleClick = () => {
+    let towidth;
+    if (isopen) {
+      towidth = "100%";
+      isopen = false;
+    } else {
+      towidth = "40%";
+      isopen = true;
+    }
+    api.start({
+      to: {
+        width: towidth,
+      },
+    });
+  };
+
+  const AddColumn_showbtn = () => {
+    setAddColumn_show(!AddColumn_show);
+  };
+  const AddColumn = () => {
+    const url = AddColumn_input.value;
+    socket.emit(url);
+  };
+
   return (
     <>
-      <div>
-        <div class="w-48 rounded-md shadow-2xl pt-28 h-full bg-cloudy float-right fixed bottom-0">
-          <div>{online}</div>
-        </div>
-        <div class="ml-48">
+      <div class="flex">
+        <animated.div
+          style={{
+            ...springs,
+          }}
+          onClick={handleClick}
+          class="w-2/5 rounded-md shadow-2xl h-full bg-cloudy"
+        >
+          <div>
+            <p>Online</p>
+            {online.map((a) => <p>@{a}</p>)}
+          </div>
+          <div>
+            <button
+              onClick={AddColumn_showbtn}
+              class="w-4/5 text-center border-4 m-4 h-12"
+            >
+              <i class="fa-solid fa-plus"></i>
+            </button>
+            {AddColumn_show && (
+              <>
+                <div class="p-4">
+                  <p>
+                    URL:<input id="AddColumn_input" type="text" />
+                  </p>
+                  <p>
+                    <button onClick={AddColumn}>追加</button>
+                  </p>
+                </div>
+              </>
+            )}
+          </div>
+        </animated.div>
+        <div class="w-full">
           <div id="msgpst">
           </div>
           <div class="fixed bottom-0 mb-4 rounded-md w-full h-auto bg-cloudy">

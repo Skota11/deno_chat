@@ -14,7 +14,12 @@ export const handler: Handlers = {
     const cookies = getCookies(req.headers);
     const token = cookies.ac;
     if (token == null) {
-      return ctx.render([]);
+      const response = new Response("", {
+        status: 303,
+        headers: { Location: "/" },
+      });
+
+      return response;
     } else {
       const User = await db_GetUserFromToken(token);
       return await ctx.render(User);
