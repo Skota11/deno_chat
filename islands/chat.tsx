@@ -10,6 +10,7 @@ const socket = io("socket.skota11.com");
 
 export default function MyComponent(props: { data: [] }) {
   const [online, setOnline] = useState([]);
+  const [play, setPlay] = useState([]);
   const [AddColumn_show, setAddColumn_show] = useState(false);
   let isopen = false;
   let username_g = props.data.name;
@@ -35,6 +36,9 @@ export default function MyComponent(props: { data: [] }) {
       content_div.innerHTML =
         `<div class="msg"><div style="display:flex; gap:0.5em;"><img src="${msg.img}" class="userimg"/><span>${msg.display_name}@${msg.name}</span><span class="nowdate">${Hour}:${Min}:${Sec}</span></div><hr style="margin: 0.5em 0;"><div>${msg.content}</div></div>`;
       pst.appendChild(content_div, pst.firstChild);
+    });
+    socket.on("newplay", (msg) => {
+      setPlay(msg);
     });
   });
 
@@ -89,7 +93,10 @@ export default function MyComponent(props: { data: [] }) {
   };
   const AddColumn = () => {
     const url = AddColumn_input.value;
-    socket.emit(url);
+    socket.emit("newplay", url);
+  };
+  const AddColumn_shortcut_1 = () => {
+    AddColumn_input.value = "https://togetheryoutube.skota11.repl.co/";
   };
 
   return (
@@ -100,8 +107,25 @@ export default function MyComponent(props: { data: [] }) {
             ...springs,
           }}
           onClick={handleClick}
-          class="w-2/5 rounded-md shadow-2xl h-full bg-cloudy"
+          class="w-2/5 rounded-md shadow-2xl bg-cloudy"
         >
+          <div>
+            {
+              <>
+                <div>
+                  <p>{play.url}</p>
+                  <iframe
+                    width="100%"
+                    height="500px"
+                    allowtransparency="true"
+                    src={play.url}
+                    frameborder="0"
+                  >
+                  </iframe>
+                </div>
+              </>
+            }
+          </div>
           <div>
             <p>Online</p>
             {online.map((a) => <p>@{a}</p>)}
@@ -116,6 +140,9 @@ export default function MyComponent(props: { data: [] }) {
             {AddColumn_show && (
               <>
                 <div class="p-4">
+                  <button class="my-2" onClick={AddColumn_shortcut_1}>
+                    ・TogetherYoutube
+                  </button>
                   <p>
                     URL:<input id="AddColumn_input" type="text" />
                   </p>
