@@ -24,7 +24,7 @@ export default function MyComponent(props: { data: [] }) {
       const pst = msgpst;
       const p = document.createElement("p");
       p.innerHTML = `<span class="msg"> - ${msg.content}</span>`;
-      pst.appendChild(p, pst.firstChild);
+      pst.insertBefore(p, pst.firstChild);
     });
     socket.on("newmsg", (msg) => {
       const pst = msgpst;
@@ -35,7 +35,7 @@ export default function MyComponent(props: { data: [] }) {
       var Sec = today.getSeconds();
       content_div.innerHTML =
         `<div class="msg"><div style="display:flex; gap:0.5em;"><img src="${msg.img}" class="userimg"/><span>${msg.display_name}@${msg.name}</span><span class="nowdate">${Hour}:${Min}:${Sec}</span></div><hr style="margin: 0.5em 0;"><div>${msg.content}</div></div>`;
-      pst.appendChild(content_div, pst.firstChild);
+      pst.insertBefore(content_div, pst.firstChild);
     });
     socket.on("newplay", (msg) => {
       setPlay(msg);
